@@ -94,4 +94,10 @@ main {
         gap: 10px;
     }
 
+    main {
+        position: absolute;
+        bottom: 15%;
+        max-width: 90%;
+    }
+
 }
