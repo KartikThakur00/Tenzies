@@ -8,7 +8,6 @@ function App() {
   const [tenzies, setTenzies] = React.useState(false);
   const [score, setScore] = React.useState({
     rollCount: 0,
-    timeCount: 0,
   });
 
   React.useEffect(() => {
@@ -48,7 +47,6 @@ function App() {
       setDice(allNewDice());
       setScore({
         rollCount: 0,
-        timeCount: 0,
       });
     }
   }
@@ -80,7 +78,7 @@ function App() {
       </p>
       <div className="dice-container">{diceElements}</div>
       <div className="tbc">
-        <div className="count">{score.timeCount} s</div>
+        {/* <div className="count">{score.timeCount} s</div> */}
         <button className="roll-dice" onClick={rollDice}>
           {tenzies ? "New Game" : "Roll"}
         </button>
