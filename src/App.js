@@ -6,6 +6,10 @@ import "./app.css";
 function App() {
   const [dice, setDice] = React.useState(allNewDice());
   const [tenzies, setTenzies] = React.useState(false);
+  const [score, setScore] = React.useState({
+    rollCount: 0,
+    timeCount: 0,
+  });
 
   React.useEffect(() => {
     const allHeld = dice.every((die) => die.isHeld);
@@ -30,6 +34,10 @@ function App() {
 
   function rollDice() {
     if (!tenzies) {
+      setScore((prevScore) => ({
+        ...prevScore,
+        rollCount: prevScore.rollCount + 1,
+      }));
       setDice((prevDice) =>
         prevDice.map((die) =>
           die.isHeld ? die : { ...die, value: Math.ceil(Math.random() * 6) }
@@ -38,6 +46,10 @@ function App() {
     } else {
       setTenzies(false);
       setDice(allNewDice());
+      setScore({
+        rollCount: 0,
+        timeCount: 0,
+      });
     }
   }
 
@@ -67,13 +79,13 @@ function App() {
         current value between rolls.
       </p>
       <div className="dice-container">{diceElements}</div>
-      <button
-        className="roll-dice"
-        onClick={rollDice}
-        style={{ width: tenzies ? "150px" : "100" }}
-      >
-        {tenzies ? "New Game" : "Roll"}
-      </button>
+      <div className="tbc">
+        <div className="count">{score.timeCount} s</div>
+        <button className="roll-dice" onClick={rollDice}>
+          {tenzies ? "New Game" : "Roll"}
+        </button>
+        <div className="count">{score.rollCount}</div>
+      </div>
     </main>
   );
 }
